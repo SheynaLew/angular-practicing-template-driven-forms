@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  onSubmit() {
+    console.log("I'm a form")
+  }
 }
