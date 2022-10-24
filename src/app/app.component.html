@@ -3,14 +3,34 @@
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
 
     <form (ngSubmit)="onSubmit()" #f="ngForm">
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <div id="form-data" ngModel="formData" #formData="ngModel">
+        <div class="form-group">
+          <label for="email">
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+              #email="ngModel">
+          </label>
+        </div>
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!f.valid">
+          Submit
+      </button>
     </form>
       <!-- Add a Form with the following Inputs (and Validators)
            1) Mail address (should not be empty and should be an email address)
            2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
               Set "Advanced" as Default
            3) A Password field (should not be empty)
-           4) A Submit Button
+           4) A Submit Button - DONE
 
            Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
 

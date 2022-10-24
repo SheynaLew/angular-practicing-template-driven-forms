@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  @ViewChild('f') signUpForm: NgForm;
+
   onSubmit() {
-    console.log("I'm a form")
+    console.log("email", this.signUpForm.value.email)
   }
 }
