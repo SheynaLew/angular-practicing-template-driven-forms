@@ -10,7 +10,11 @@ export class AppComponent {
 
   @ViewChild('f') signUpForm: NgForm;
 
+  defaultSubscription = "advanced";
+
   onSubmit() {
-    console.log("email", this.signUpForm.value.email)
+    console.log("value", this.signUpForm.value);
+    console.log("email", this.signUpForm.value.email);
+    console.log("subscriptions", this.signUpForm.value.subscriptions)
   }
 }
