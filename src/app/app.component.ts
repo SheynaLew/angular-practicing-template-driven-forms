@@ -16,5 +16,6 @@ export class AppComponent {
     console.log("value", this.signUpForm.value);
     console.log("email", this.signUpForm.value.email);
     console.log("subscriptions", this.signUpForm.value.subscriptions)
+    console.log("password", this.signUpForm.value.password)
   }
 }
