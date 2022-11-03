@@ -1,22 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-
-    <form (ngSubmit)="onSubmit()" #f="ngForm">
-      <div id="form-data" ngModel="formData" #formData="ngModel">
-        <div class="form-group">
-          <label for="email">
-            <input
-              type="email"
-              id="email"
-              class="form-control"
-              ngModel
-              name="email"
-              required
-              email
-              >
-          </label>
-        </div>
+<!-- My solution -->
+    <form (ngSubmit)="onSubmitMyForm()" #f="ngForm">
+      <div
+        id="form-data"
+        ngModel="formData"
+        #formData="ngModel"
+        >
+          <label for="email">Email</label>
+          <input
+          type="email"
+          id="email"
+          class="form-control"
+          ngModel
+          name="email"
+          required
+          email
+          ngModelGroup="emailInput"
+          #emailInput="ngModelGroup"
+          >
+          <p class="error-message" *ngIf="!emailInput.valid && emailInput.touched">Email invalid. Please enter a valid email address.</p>
         <label for="subscriptions">Subscriptions</label>
         <select
           name="subscriptions"
@@ -34,7 +38,10 @@
           class="form-control"
           ngModel
           name="password"
-          required>
+          required
+          ngModelGroup="passwordInput"
+          #passwordInput="ngModelGroup">
+          <p class="error-message" *ngIf="!passwordInput.valid && passwordInput.touched">Password invalid. Please enter a valid password.</p>
       </div>
       <button
         class="btn btn-primary"
@@ -43,6 +50,7 @@
           Submit
       </button>
     </form>
+
       <!-- Add a Form with the following Inputs (and Validators)
            1) Mail address (should not be empty and should be an email address) - DONE
            2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
@@ -55,6 +63,55 @@
            Upon submitting the form, you should simply print the Value of the Form to the Console. - DONE
            Optionally, display it in your template.
       -->
+    </div>
+  </div>
+</div>
+
+
+<!-- Max's solution -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form #signupForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Mail</label>
+          <input
+            type="email"
+            id="email"
+            ngModel
+            name="email"
+            required
+            email
+            class="form-control"
+            #email="ngModel"
+            >
+        </div>
+        <span *ngIf="!email.valid && email.touched" class="help-block">Please enter a valid email!</span>
+        <div class="form-group">
+          <label for="subscription">Choose a subscription</label>
+          <select
+            name="subscription"
+            id="subscription"
+            [ngModel]="selectedSubscription"
+            class="form-control">
+              <option *ngFor="let subscription of subscriptions" [value]="subscription">{{ subscription }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ngModel
+            required
+            class="form-control"
+            #password="ngModel">
+            <span *ngIf="!password.valid && password.touched" class="help-block">Please enter a password!</span>
+        </div>
+        <p *ngIf="!signupForm.valid && signupForm.touched" >The form is invalid!</p>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </div>
